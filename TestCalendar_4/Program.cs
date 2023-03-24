@@ -1,7 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using TestCalendar_4.DAL;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var connectionString = builder.Configuration.GetConnectionString("MySQL");
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseMySQL();
+});
 
 var app = builder.Build();
 
